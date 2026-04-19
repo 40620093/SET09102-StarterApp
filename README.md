@@ -6,6 +6,17 @@ nav_order: 5
 mermaid: true
 ---
 
+#SET09102 Starter App - Keir 
+
+## My Implementation
+This project is part of my SET09102 coursework.
+I will be building on the existing starter application 
+-Adding new features
+-Working with the database
+-Running the app on a emulator 
+
+to be continued
+
 # StarterApp
 
 The purpose of this app is to act as a starting point for further development. It provides some
