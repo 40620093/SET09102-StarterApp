@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using StarterApp.Database.Models;
+using StarterApp.Models;
 
 namespace StarterApp.Database.Data;
 
@@ -12,6 +13,9 @@ public class AppDbContext : DbContext
     { }
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     { }
+
+    //Represents the Items table in the database
+    public DbSet<Item> Items {get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
