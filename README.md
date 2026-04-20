@@ -15,9 +15,52 @@ I will be building on the existing starter application
 -Working with the database
 -Running the app on a emulator 
 
-to be continued
+## Technologies Used
+-.NET MAUI
+-C#
+-PostgreSQL
+-Docker
+-Entity Framework Core 
 
-# StarterApp
+## How to run
+#### 1. Install Required Software 
+Make sure the following are installed on your computer: 
+Docker Desktop 
+.NET SDK
+Visual Studio Code or Visual Studio
+Android Emulator 
+
+### 2. Start Docker
+Open Docker Desktop and ensure it is running. 
+
+### 3. Start the Database
+Open a terminal in the project folder and run: 
+Run docker-compose up -d
+This will start the PostgreSQL database. 
+
+### 4. Open the project
+Open the project in Visual Studio Code or Visual Studio 
+
+### 5. Start the Android Emulator
+Open the Android Emulator 
+Wait for the device to fully load
+
+### 6. Run the Application
+Select the Android emulator as the target device
+Build and run the application
+
+### 7. Using the Application
+Once the app launches: 
+Register a new account
+Log in
+Use the application features
+
+## Database Information
+The database runs using Docker 
+The app connects automatically on startup
+Entity Framework Core is used for database management
+
+## Provided Starter Application 
 
 The purpose of this app is to act as a starting point for further development. It provides some
 basic features including:
