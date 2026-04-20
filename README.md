@@ -1,34 +1,26 @@
----
-title: "StarterApp readme"
-parent: StarterApp
-grand_parent: C# practice
-nav_order: 5
-mermaid: true
----
-
 #SET09102 Starter App - Keir 
 
 ## My Implementation
 This project is part of my SET09102 coursework.
 I will be building on the existing starter application 
--Adding new features
--Working with the database
--Running the app on a emulator 
+- Adding new features
+- Working with the database
+- Running the app on a emulator 
 
 ## Technologies Used
--.NET MAUI
--C#
--PostgreSQL
--Docker
--Entity Framework Core 
+- .NET MAUI
+- C#
+- PostgreSQL
+- Docker
+- Entity Framework Core 
 
 ## How to run
 #### 1. Install Required Software 
 Make sure the following are installed on your computer: 
-Docker Desktop 
-.NET SDK
-Visual Studio Code or Visual Studio
-Android Emulator 
+- Docker Desktop 
+- .NET SDK
+- Visual Studio Code or Visual Studio
+- Android Emulator 
 
 ### 2. Start Docker
 Open Docker Desktop and ensure it is running. 
