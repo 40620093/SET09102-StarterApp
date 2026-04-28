@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StarterApp.Database.Models;
 using StarterApp.Services;
+using StarterApp.Database.Data.Repositories;
 
 namespace StarterApp.ViewModels;
 
@@ -20,6 +21,9 @@ public partial class MainViewModel : BaseViewModel
     
     /// @brief Navigation service for managing page navigation
     private readonly INavigationService _navigationService;
+
+    //repository used to load item records from database
+    private readonly IItemRepository _itemRepository;
 
     /// @brief The currently authenticated user
     /// @details Observable property containing the current user's information
@@ -48,10 +52,11 @@ public partial class MainViewModel : BaseViewModel
     /// @param authService The authentication service instance
     /// @param navigationService The navigation service instance
     /// @details Sets up the required services, initializes the title, and loads user data
-    public MainViewModel(IAuthenticationService authService, INavigationService navigationService)
+    public MainViewModel(IAuthenticationService authService, INavigationService navigationService, IItemRepository itemRepository)
     {
         _authService = authService;
         _navigationService = navigationService;
+        _itemRepository = itemRepository;
         Title = "Dashboard";
 
         LoadUserData();
