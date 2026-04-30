@@ -29,6 +29,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -190,9 +191,37 @@
                                    TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}" />
                         </Grid>
                     </Border>
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}"
+                            Stroke="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray700}}"
+                            StrokeThickness="1"
+                            Padding="20"
+                            HeightRequest="80">
 
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnToolsTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label Text="Power Tools"
+                                    FontSize="16"
+                                    FontAttributes="Bold" />
+
+                            <Label Text=">"
+                                    Grid.Column="1"
+                                    FontSize="18"
+                                    VerticalOptions="Center" />
+
+                            
+                        </Grid>
+                        </Border>
                 </StackLayout>
-            </Grid>
-        </ScrollView>
-    </RefreshView>
-</ContentPage>
+               
+               </Grid>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage>
