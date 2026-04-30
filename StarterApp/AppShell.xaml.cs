@@ -11,6 +11,8 @@ public partial class AppShell : Shell
 		InitializeComponent();
 
 		Routing.RegisterRoute(nameof(ItemsPage), typeof(ItemsPage));
-		//Registers a navigation route fpr ItemsPage so it can be accessed using shell navigation
+		//Registers a navigation route for ItemsPage so it can be accessed using shell navigation
+		Routing.RegisterRoute(nameof(AddItemPage), typeof(AddItemPage));
+		//Registers a navigation route for AddItemPage so it can be accessed using shell navigation
 	}
 }

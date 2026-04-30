@@ -21,6 +21,11 @@ public partial class ItemsPage : ContentPage
 
         BindingContext = this;
     }
+
+    private async void OnAddItemClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AddItemPage));
+    }
 }
 
 public class Item

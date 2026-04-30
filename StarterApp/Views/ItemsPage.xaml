@@ -4,6 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Items">
 
+    <VerticalStackLayout Padding="10">
+    
+    <Button Text="Add Item"
+        Clicked="OnAddItemClicked" />
+
     <CollectionView ItemsSource="{Binding Items}">
 
     <CollectionView.ItemTemplate>
@@ -14,6 +19,8 @@
         </DataTemplate>
     </CollectionView.ItemTemplate>
     </CollectionView>
+
+    </VerticalStackLayout>
 
 </ContentPage>
     
