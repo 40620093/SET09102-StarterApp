@@ -10,9 +10,29 @@
                 FontSize="20"
                 FontAttributes="Bold" />
 
-            <Entry Placeholder="Item Name"
-                Text="{Binding Name}" />
+            
+            <!--item title-->
+            <Entry Placeholder="Item Title"
+                Text="{Binding Title}" />
+            
+            <!--description-->
+            <Entry Placeholder="Description"
+                Text="{Binding Description}" />
 
+            <!--category-->
+            <Entry Placeholder="Category"
+                Text="{Binding Category}" />
+            
+            <!--location-->
+            <Entry Placeholder="Location"
+                Text="{Binding Location}" />
+
+            <!--daily rate-->
+            <Entry Placeholder="Daily Rate"
+                Keyboard="Numeric"
+                Text="{Binding DailyRate}" />
+
+        
             <Button Text="Save"
                 Command="{Binding SaveCommand}" />
             
