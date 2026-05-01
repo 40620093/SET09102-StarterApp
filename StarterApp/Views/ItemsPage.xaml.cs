@@ -35,18 +35,39 @@ public partial class ItemsPage : ContentPage //page responsible for displaying a
         {
             Items.Add(new Item
             {
-                Name = item.Title
+               Id = item.Id,
+                Title = item.Title,
+                Description = item.Description,
+                Category = item.Category,
+                Location = item.Location,
+                DailyRate = item.DailyRate,
+                IsAvailable = item.IsAvailable,
+                CreatedAtUtc = item.CreatedAtUtc,
+                OwnerUserId = item.OwnerUserId
             });
         }
     }
+    //runs when a user taps an item in the list
+    private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
+    {
+        var selectedItem = e.CurrentSelection.FirstOrDefault() as Item;
 
+        //if nothing selected, do nothing
+        if (selectedItem == null)
+        return;
+
+        //navigate to the detail page and pass selected item
+        await Shell.Current.GoToAsync(nameof(ItemDetailPage), true, new Dictionary<string, object>
+        {
+            {"SelectedItem", selectedItem }
+            
+        });
+
+        //clears selection so user can tap again
+        ((CollectionView)sender).SelectedItem = null;
+    }
     private async void OnAddItemClicked(object sender, EventArgs e) //naviagte to Add Item page
     {
         await Shell.Current.GoToAsync(nameof(AddItemPage));
     }
-}
-
-public class Item
-{
-    public string Name { get; set;}
 }

@@ -9,12 +9,15 @@
     <Button Text="Add Item"
         Clicked="OnAddItemClicked" />
 
-    <CollectionView ItemsSource="{Binding Items}">
-
+    <CollectionView ItemsSource="{Binding Items}"
+        SelectionMode="Single"
+        SelectionChanged="OnItemSelected"> 
+        
+    <!--shows all saved items and runs OnItemSelected when one is tapped -->
     <CollectionView.ItemTemplate>
         <DataTemplate>
             <Border Padding="10" Margin="5">
-                <Label Text="{Binding Name}" FontSize="16" />
+                <Label Text="{Binding Title}" FontSize="16" />
             </Border>
         </DataTemplate>
     </CollectionView.ItemTemplate>
