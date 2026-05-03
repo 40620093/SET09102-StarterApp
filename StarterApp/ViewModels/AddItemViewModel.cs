@@ -4,9 +4,15 @@ using StarterApp.Models;
 
 namespace StarterApp.ViewModels;
 
-public class AddItemViewModel : BaseViewModel
+public class AddItemViewModel : BaseViewModel 
 {
-    private readonly IItemRepository _itemRepository;
+    private readonly IItemRepository _itemRepository; //repository used to interact with database
+
+    //tracks if we are editing an exisiting item
+    private bool _isEditMode = false;
+
+    //stores the ID of the item being edited
+    private int _editingItemID;
     
     public string Title { get; set; } //title entered by the user
 
@@ -18,12 +24,37 @@ public class AddItemViewModel : BaseViewModel
 
     public string DailyRate { get; set; } //rental price entered by the user
 
-    public ICommand SaveCommand { get; }
+    public ICommand SaveCommand { get; } //command bound to the save button
 
-    public AddItemViewModel(IItemRepository itemRepository)
+    public AddItemViewModel(IItemRepository itemRepository) //constructor, injects repository and sets up save command
     {
         _itemRepository = itemRepository;
-        SaveCommand = new Command(async () => await Save());
+        SaveCommand = new Command(async () => await Save()); //when button is clicked, run Save()
+    }
+
+    //loads an existing item into the form for editing
+    public void LoadItemForEdit(Item item)
+    {
+        //switch to edit mode
+        _isEditMode = true;
+
+        //store the ID so we update the correct item later
+        _editingItemID = item.Id;
+
+        //populate the form fields with exisiting data 
+        Title = item.Title;
+        Description = item.Description;
+        Category = item.Category;
+        Location = item.Location;
+        DailyRate = item.DailyRate.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+        //refresh the ui so the form fields show the loaded values
+        OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(Description));
+        OnPropertyChanged(nameof(Category));
+        OnPropertyChanged(nameof(Location));
+        OnPropertyChanged(nameof(DailyRate));
+
     }
 
     private async Task Save()
@@ -42,8 +73,8 @@ public class AddItemViewModel : BaseViewModel
             );
             return;
         }
-        
-        if (!decimal.TryParse(DailyRate, out var rate)) // validate that DailyRate entered by the user can be converted to a decimal 
+        // validate that DailyRate entered by the user can be converted to a decimal 
+        if (!decimal.TryParse(DailyRate, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var rate))
         {
             await Shell.Current.DisplayAlertAsync(
                 "Invalid Price",
@@ -61,8 +92,30 @@ public class AddItemViewModel : BaseViewModel
             DailyRate = rate
             
         };
+        //decide if we are adding a new item or updating an already existing one
+        if (_isEditMode)
+        {
+        // keep the same ID so the correct item is updated
+        item.Id = _editingItemID;
+
+        //update existing item
+        await _itemRepository.UpdateItemAsync(item);
+        }
+        else
+        {
+            //add new item
+            await _itemRepository.AddItemAsync(item);
+        }
         
-        await _itemRepository.AddItemAsync(item);
-        await Shell.Current.GoToAsync("..");
+        //navigate back after saving
+        if (_isEditMode)
+        {
+            await Shell.Current.GoToAsync("../..");
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("..");
+        }
+        
     }
 }

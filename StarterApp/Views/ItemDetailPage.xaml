@@ -28,6 +28,10 @@
             Clicked="OnDeleteClicked"
             BackgroundColor="#FF0000"
             TextColor="#FFFFFF" />
+        
+        <!--Edit Button-->
+        <Button Text="Edit Item"
+            Clicked="OnEditClicked" />
 
     </VerticalStackLayout>
 

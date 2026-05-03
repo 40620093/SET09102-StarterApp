@@ -38,7 +38,21 @@ public class ItemRepository : IItemRepository
     //update an existing item
     public async Task UpdateItemAsync (Item item)
     {
-        _context.Items.Update(item);
+        //find the exisiting item in the database
+        var exisitingItem = await _context.Items.FindAsync(item.Id);
+
+        //if item cannot be found, stop
+        if (exisitingItem == null)
+        return;
+
+        //update the editable fields
+        exisitingItem.Title = item.Title;
+        exisitingItem.Description = item.Description;
+        exisitingItem.Category = item.Category;
+        exisitingItem.Location = item.Location;
+        exisitingItem.DailyRate = item.DailyRate;
+
+        //save updated item
         await _context.SaveChangesAsync();
     }
 

@@ -57,4 +57,22 @@ public partial class ItemDetailPage : ContentPage
      //go back to previous page after deletion
      await Shell.Current.GoToAsync("..");
     }
+
+    //event handler for when the Edit Item button is clicked
+    private async void OnEditClicked(object sender, EventArgs e)
+    {
+        //safety check to ensure an item has loaded before editing
+        if (_selectedItem == null)
+        {
+            await DisplayAlertAsync("Error", "No item selected", "OK");
+        
+        return;
+        }
+
+        //navigate to AddItemPage and pass the selected item so the form is pre filled
+        await Shell.Current.GoToAsync("AddItemPage", true, new Dictionary<string, object>
+        {
+            { "SelectedItem", _selectedItem }
+        });
+    }
 }
