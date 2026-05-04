@@ -1,5 +1,8 @@
 using StarterApp.Models;
 using StarterApp.Database.Data.Repositories;
+using System.Runtime.CompilerServices;
+using System.Net.Cache;
+using System.Linq.Expressions;
 
 namespace StarterApp.Views;
 
@@ -9,6 +12,8 @@ public partial class ItemDetailPage : ContentPage
 {
     private Item _selectedItem;
     private readonly IItemRepository _itemRepository; //repository used to delete items from the database
+
+    private readonly IRentalRequestRepository _rentalRequestRepository; //handles rental requests
 
     // property that receives the selected item passed from the previous page
     public Item SelectedItem
@@ -23,12 +28,15 @@ public partial class ItemDetailPage : ContentPage
     }
 
     //constructor for the page
-    public ItemDetailPage(IItemRepository itemRepository)
+    public ItemDetailPage(
+        IItemRepository itemRepository,
+        IRentalRequestRepository rentalRequestRepository)
     {
-
-    //store the repository so this page can access database actions
-    _itemRepository = itemRepository;
+        //store the repository so this page can access database actions
+        _itemRepository = itemRepository;
+        _rentalRequestRepository = rentalRequestRepository;
     
+
         //loads the xaml for this page
         InitializeComponent();
     }
@@ -74,5 +82,42 @@ public partial class ItemDetailPage : ContentPage
         {
             { "SelectedItem", _selectedItem }
         });
+
     }
+    
+        //event handler for when the Request Rental button is clicked
+        private async void OnRequestRentalClicked(object sender, EventArgs e)
+    {
+    
+        {
+
+        //safety check to ensure an item is selected
+        if (_selectedItem == null)
+        {
+        
+        await DisplayAlertAsync("Error", "No item selected", "OK");
+
+        return;
+    }
+
+    //create a new rental request
+    var request = new RentalRequest
+    {
+        ItemId = _selectedItem.Id,
+        ItemTitle = _selectedItem.Title,
+        OwnerUserId = _selectedItem.OwnerUserId,
+        RequesterUserId = "TEMP USER",
+        RequestedAtUtc = DateTime.UtcNow,
+        Status = "Pending"
+    };
+
+    //save the request using rental request repository
+    await _rentalRequestRepository.AddRequestAsync(request);
+    
+    //confirm the request was submitted
+    await DisplayAlertAsync("Success", "Rental request submitted", "OK");
+    }
+
+    
+}
 }

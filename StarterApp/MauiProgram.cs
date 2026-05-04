@@ -5,6 +5,7 @@ using StarterApp.Views;
 using System.Diagnostics;
 using StarterApp.Services;
 using StarterApp.Database.Data.Repositories;
+using StarterApp.Models;
 
 namespace StarterApp;
 
@@ -46,6 +47,7 @@ public static class MauiProgram
         builder.Services.AddTransient<AddItemPage>();
         builder.Services.AddTransient<AddItemViewModel>();
         builder.Services.AddTransient<ItemDetailPage>();
+        builder.Services.AddScoped<IRentalRequestRepository, RentalRequestRepository>();
 
 #if DEBUG
         builder.Logging.AddDebug();

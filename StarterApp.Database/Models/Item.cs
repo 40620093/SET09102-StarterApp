@@ -34,7 +34,7 @@ namespace StarterApp.Models
 
         public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow; //stores when item was created 
 
-        public int OwnerUserId { get; set; } //links the item to the user who created it
+        public int OwnerUserId { get; set; } //links the item to the user who created it 
 
 
 

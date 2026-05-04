@@ -33,6 +33,10 @@
         <Button Text="Edit Item"
             Clicked="OnEditClicked" />
 
+        <!--button used by another user to request renting an item -->
+        <Button Text="Request Rental"
+            Clicked="OnRequestRentalClicked" />
+
     </VerticalStackLayout>
 
     </ContentPage>
